@@ -11,14 +11,14 @@ script:
   - docker run -e CI=true forrestmoon/react-test npm test
 
 after_success:
-  - docker build -t udemy/multi-client ./client
-  - docker build -t udemy/multi-nginx ./nginx
-  - docker build -t udemy/multi-server ./server
-  - docker build -t udemy/multi-worker ./worker
+  - docker build -t forrestmoon/udemy/multi-client ./client
+  - docker build -t forrestmoon/udemy/multi-nginx ./nginx
+  - docker build -t forrestmoon/udemy/multi-server ./server
+  - docker build -t forrestmoon/udemy/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push udemy/multi-client
-  - docker push udemy/multi-nginx
-  - docker push udemy/multi-server
-  - docker push udemy/multi-worker
+  - docker push forrestmoon/udemy/multi-client
+  - docker push forrestmoon/udemy/multi-nginx
+  - docker push forrestmoon/udemy/multi-server
+  - docker push forrestmoon/udemy/multi-worker
