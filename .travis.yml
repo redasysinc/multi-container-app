@@ -1,20 +1,23 @@
+sudo: required
+language: generic
+
 services:
   - docker
 
 before_install:
-  - docker build -t forrestmoon/react=test -f ./client/Dockerfile.dev ./client
+  - docker build -t forrestmoon/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run forrestmoon/react-test npm test -- --coverage
+  - docker run -e CI=true forrestmoon/react-test npm test
 
 after_success:
   - docker build -t forrestmoon/multi-client ./client
   - docker build -t forrestmoon/multi-nginx ./nginx
   - docker build -t forrestmoon/multi-server ./server
   - docker build -t forrestmoon/multi-worker ./worker
-#LOG IN TO DOCKER
+  # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-#PUSH BUILT IMAGES TO DOCKERHUB
+  # Take those images and push them to docker hub
   - docker push forrestmoon/multi-client
   - docker push forrestmoon/multi-nginx
   - docker push forrestmoon/multi-server
