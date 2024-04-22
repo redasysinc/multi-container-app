@@ -27,6 +27,7 @@ deploy:
   provider: elasticbeanstalk
   region: us-east-2
   app: redasys-multi-docker
+  env: Redasys-multi-docker-env
   bucket_name: "elasticbeanstalk-us-east-2-795369863836"
   bucket_path: redasys-multi-docker
   on:
