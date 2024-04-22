@@ -1,0 +1,21 @@
+services:
+  - docker
+
+before_install:
+  - docker build -t forrestmoon/react=test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run forrestmoon/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t forrestmoon/multi-client ./client
+  - docker build -t forrestmoon/multi-nginx ./nginx
+  - docker build -t forrestmoon/multi-server ./server
+  - docker build -t forrestmoon/multi-worker ./worker
+#LOG IN TO DOCKER
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+#PUSH BUILT IMAGES TO DOCKERHUB
+  - docker push forrestmoon/multi-client
+  - docker push forrestmoon/multi-nginx
+  - docker push forrestmoon/multi-server
+  - docker push forrestmoon/multi-worker
