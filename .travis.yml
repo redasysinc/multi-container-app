@@ -27,10 +27,10 @@ deploy:
   provider: elasticbeanstalk
   region: us-east-2
   app: redasys-multi-docker
-  bucket_name: elasticbeanstalk-us-east-2-795369863836
+  bucket_name: "elasticbeanstalk-us-east-2-795369863836"
   bucket_path: redasys-docker-multi
   on:
     branch: main
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key:
-    secure: $AWS_SECRET_KEY
+    secure: "$AWS_SECRET_KEY"
