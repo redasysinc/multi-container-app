@@ -11,25 +11,25 @@ script:
   - docker run -e CI=true forrestmoon/react-test npm test
 
 after_success:
-  - docker build -t forrestmoon/multi-client ./client
-  - docker build -t forrestmoon/multi-nginx ./nginx
-  - docker build -t forrestmoon/multi-server ./server
-  - docker build -t forrestmoon/multi-worker ./worker
+  - docker build -t forrestmoon/multi-client-10-14 ./client
+  - docker build -t forrestmoon/multi-nginx-10-14 ./nginx
+  - docker build -t forrestmoon/multi-server-10-14 ./server
+  - docker build -t forrestmoon/multi-worker-10-14 ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push forrestmoon/multi-client
-  - docker push forrestmoon/multi-nginx
-  - docker push forrestmoon/multi-server
-  - docker push forrestmoon/multi-worker
+  - docker push forrestmoon/multi-client-10-14
+  - docker push forrestmoon/multi-nginx-10-14
+  - docker push forrestmoon/multi-server-10-14
+  - docker push forrestmoon/multi-worker-10-14
 
 deploy:
   provider: elasticbeanstalk
-  region: us-east-2
-  app: redasys-multi-docker
-  env: Redasys-multi-docker-env
-  bucket_name: "elasticbeanstalk-us-east-2-795369863836"
-  bucket_path: redasys-multi-docker
+  region: 'us-east-2'
+  app: 'redasys-multi-docker'
+  env: 'Redasys-multi-docker-env'
+  bucket_name: 'elasticbeanstalk-us-east-2-795369863836'
+  bucket_path: 'redasys-multi-docker'
   on:
     branch: main
   access_key_id: $AWS_ACCESS_KEY
