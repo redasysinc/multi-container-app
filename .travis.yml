@@ -26,10 +26,10 @@ after_success:
 deploy:
   provider: elasticbeanstalk
   region: 'us-east-2'
-  app: 'redasys-multi-docker'
-  env: 'Redasys-multi-docker-env'
+  app: 'multi-docker'
+  env: 'Multi-docker-env'
   bucket_name: 'elasticbeanstalk-us-east-2-795369863836'
-  bucket_path: 'redasys-multi-docker'
+  bucket_path: 'multi-docker'
   on:
     branch: main
   access_key_id: $AWS_ACCESS_KEY
