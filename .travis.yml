@@ -16,7 +16,7 @@ after_success:
   - docker build -t forrestmoon/multi-server-10-14 ./server
   - docker build -t forrestmoon/multi-worker-10-14 ./worker
   # Log in to the docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "forrestmoon" --password-stdin
   # Take those images and push them to docker hub
   - docker push forrestmoon/multi-client-10-14
   - docker push forrestmoon/multi-nginx-10-14
